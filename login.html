@@ -1,122 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jordan Shop - Login</title>
-    
-<link rel="icon" type="image/png" href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan Shop - Login</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
 
-    <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; background: #000; }
-        
-        .site-container {
-            width: 100%; height: 100%;
-            /* Fundo mais claro para se ver bem a imagem (0.3 de escurecimento) */
-            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('login.jpg');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; background: #000; }
+        
+        .site-container {
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('login.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
 
-        .login-box {
-            background: rgba(20, 5, 5, 0.9); /* Caixa escura mas elegante */
-            padding: 40px; border-radius: 20px;
-            width: 320px; text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-        }
+        .login-box {
+            background: rgba(20, 5, 5, 0.9);
+            padding: 40px; border-radius: 20px;
+            width: 320px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        }
 
-        /* Estilo do ícone de perfil removido */
+        /* Removi o estilo da profile-icon para limpar o CSS */
 
-        .input-group { 
-            background: #3a0000; margin: 15px 0; padding: 12px; 
-            border-radius: 10px; display: flex; align-items: center; 
-            position: relative;
-        }
+        .input-group { 
+            background: #3a0000; margin: 15px 0; padding: 12px; 
+            border-radius: 10px; display: flex; align-items: center; 
+            position: relative;
+        }
 
-        input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
-        
-        /* O Olho da Password */
-        .toggle-btn { cursor: pointer; font-size: 18px; margin-left: 10px; user-select: none; }
+        input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
+        
+        .toggle-btn { cursor: pointer; font-size: 18px; margin-left: 10px; user-select: none; }
 
-        .btn-entrar { 
-            width: 100%; padding: 15px; background: #b00000; color: white; 
-            border: none; border-radius: 10px; cursor: pointer; 
-            font-weight: bold; margin-top: 10px; transition: 0.3s;
-        }
-        .btn-entrar:hover { background: #ff0000; transform: scale(1.02); }
+        .btn-entrar { 
+            width: 100%; padding: 15px; background: #b00000; color: white; 
+            border: none; border-radius: 10px; cursor: pointer; 
+            font-weight: bold; margin-top: 10px; transition: 0.3s;
+        }
+        .btn-entrar:hover { background: #ff0000; transform: scale(1.02); }
 
-        /* Botão Discord com Logo Oficial */
-        .btn-discord {
-            background: #5865F2; color: white; text-decoration: none;
-            padding: 15px; border-radius: 10px; display: flex;
-            align-items: center; justify-content: center;
-            margin-top: 20px; font-weight: bold; transition: 0.3s;
-        }
-        .btn-discord:hover { background: #4752c4; }
-        .discord-logo { width: 22px; margin-right: 12px; }
+        .btn-discord {
+            background: #5865F2; color: white; text-decoration: none;
+            padding: 15px; border-radius: 10px; display: flex;
+            align-items: center; justify-content: center;
+            margin-top: 20px; font-weight: bold; transition: 0.3s;
+        }
+        .btn-discord:hover { background: #4752c4; }
+        .discord-logo { width: 22px; margin-right: 12px; }
 
-        .divider { color: #666; font-size: 12px; margin: 15px 0; }
-    </style>
+        .divider { color: #666; font-size: 12px; margin: 15px 0; }
+    </style>
 </head>
 <body>
 
-    <div class="site-container">
-        <div class="login-box">
-                        
-            <div class="input-group">
-                <input type="text" id="user" placeholder="Nome do Utilizador">
-                <span>👤</span>
-            </div>
-            
-            <div class="input-group">
-                <input type="password" id="pass" placeholder="Password">
-                <span class="toggle-btn" id="eye-icon" onclick="togglePass()">🙈</span>
-            </div>
-            
-            <button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
-            
-            <div class="divider">OU</div>
-            
-         <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
-    <img src="https://assets-global.website-files.com/6257adef93467e05d00d23f0/636e0a224930327376991901_Discord-Logo-White.svg" class="discord-logo" style="width: 25px;">
-    Login Discord
-            </a>
-        </div>
-    </div>
+    <div class="site-container">
+        <div class="login-box">
+            <div class="input-group">
+                <input type="text" id="user" placeholder="Nome do Utilizador">
+                <span>👤</span>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="pass" placeholder="Password">
+                <span class="toggle-btn" id="eye-icon" onclick="togglePass()">🙈</span>
+            </div>
+            
+            <button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
+            
+            <div class="divider">OU</div>
+            
+            <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
+                <img src="https://assets-global.website-files.com/6257adef93467e05d00d23f0/636e0a224930327376991901_Discord-Logo-White.svg" class="discord-logo">
+                Login Discord
+            </a>
+        </div>
+    </div>
 
-    <script>
-        const contas = {
-            "Jordan Costa": "Jordan26Costa",
-            "Arteex26": "Arteex_26",
-            "lucasvieira": "lucasvieira0453",
-            "migueldodrip": "migueldodrip_09110",
-            "pincher11": "pincher_11"
-        };
+    <script>
+        const contas = {
+            "Jordan Costa": "Jordan26Costa",
+            "Arteex26": "Arteex_26",
+            "lucasvieira": "lucasvieira0453",
+            "migueldodrip": "migueldodrip_09110",
+            "pincher11": "pincher_11"
+        };
 
-function validarLogin() {
-    const u = document.getElementById('user').value;
-    const p = document.getElementById('pass').value;
-    
-    if (contas[u] && contas[u] === p) {
-        window.location.href = `loja.html?user=${encodeURIComponent(u)}`;
-    } else {
-        alert('Acesso negado! Verifica o utilizador ou a password.');
-    }
-}
+        function validarLogin() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            
+            if (contas[u] && contas[u] === p) {
+                // ISTO VAI MANDAR PARA A LOJA
+                window.location.href = `loja.html?user=${encodeURIComponent(u)}`;
+            } else {
+                alert('Acesso negado!');
+            }
+        }
 
-        // Função para mostrar/esconder password e mudar o ícone
-        function togglePass() {
-            const input = document.getElementById('pass');
-            const icon = document.getElementById('eye-icon');
-            if (input.type === "password") {
-                input.type = "text";
-                icon.textContent = "🐵"; // Olho aberto
-            } else {
-                input.type = "password";
-                icon.textContent = "🙈"; // Olho fechado/riscado
-            }
-        }
-    </script>
+        function togglePass() {
+            const input = document.getElementById('pass');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.textContent = "🐵"; 
+            } else {
+                input.type = "password";
+                icon.textContent = "🙈"; 
+            }
+        }
+    </script>
 </body>
 </html>
