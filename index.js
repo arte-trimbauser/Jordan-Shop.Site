@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const CLIENT_ID = '1424479855466123284';
 const CLIENT_SECRET = 'ZIpXF6fAzxGhTaXmXFt7TLF-T_-57aq_'; 
 const REDIRECT_URI = 'https://jordan-shop-site.onrender.com/callback';
-const GUILD_ID = '1393658313006383176';
+const GUILD_ID = '1393629457599828040';
 
 app.use(express.static(path.join(__dirname, '/')));
 
