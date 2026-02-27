@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 // CONFIGURAÇÃO - PREENCHE ESTES DADOS
 const CLIENT_ID = '1424479855466123284';
-const CLIENT_SECRET = '1424479855466123284'; // <--- COLA AQUI
+const CLIENT_SECRET = 'ZIpXF6fAzxGhTaXmXFt7TLF-T_-57aq_'; // <--- COLA AQUI
 const REDIRECT_URI = 'https://jordan-shop-site.onrender.com/callback';
 const GUILD_ID = '1393658313006383176';
 
