@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>Jordan Shop - Menu</title>
+    <link rel="icon" type="image/jpeg" href="login.jpg">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; color: white; }
+        .bg { 
+            position: fixed; width: 100%; height: 100%; 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('login.jpg');
+            background-size: cover; background-position: center; z-index: -1;
+        }
+        /* Topo */
+        .header { display: flex; justify-content: space-between; padding: 10px 20px; background: rgba(30, 0, 0, 0.85); border-bottom: 2px solid #b00000; }
+        .btn-status { background: #4a0000; border: none; color: white; padding: 8px 15px; border-radius: 5px; }
+
+        .container { display: flex; height: 90vh; }
+        
+        /* Menu Lateral */
+        .sidebar { width: 220px; background: rgba(20, 5, 5, 0.95); padding: 20px; }
+        .menu-btn { background: #8b0000; padding: 12px; margin: 8px 0; border-radius: 5px; cursor: pointer; text-align: center; font-weight: bold; }
+        .menu-btn:hover { background: #ff0000; }
+
+        /* Centro */
+        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .welcome-box { font-size: 45px; text-align: center; text-shadow: 3px 3px 5px #000; }
+        .user-name { color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="header">
+        <div style="background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 4px;">Jordan Shop Site | Atualizar</div>
+        <button class="btn-status" id="top-user">Olá User</button>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div style="background:#500; padding:10px; margin-bottom:15px; border-radius:5px; text-align:center;">Pesquisar</div>
+            <div class="menu-btn" style="border: 2px solid white;">• Menu</div>
+            <div class="menu-btn">Transcripts</div>
+            <div class="menu-btn">Vendas</div>
+            <div class="menu-btn">Reivindicações</div>
+            <div class="menu-btn">Aberturas de ticket</div>
+            <div class="menu-btn">Bot Online</div>
+        </div>
+
+        <div class="main-content">
+            <div class="welcome-box">
+                Bem-Vindo User <span class="user-name" id="display-name">@user</span><br>
+                aqui é o menu
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pega o nome do utilizador da URL
+        const params = new URLSearchParams(window.location.search);
+        const user = params.get('user') || 'Convidado';
+        document.getElementById('display-name').textContent = '@' + user;
+        document.getElementById('top-user').textContent = 'Olá ' + user;
+    </script>
+</body>
+</html>
