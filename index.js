@@ -4,9 +4,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// CONFIGURAÇÃO - PREENCHE ESTES DADOS
 const CLIENT_ID = '1424479855466123284';
-const CLIENT_SECRET = 'ZIpXF6fAzxGhTaXmXFt7TLF-T_-57aq_'; // <--- COLA AQUI
+const CLIENT_SECRET = 'ZIpXF6fAzxGhTaXmXFt7TLF-T_-57aq_'; 
 const REDIRECT_URI = 'https://jordan-shop-site.onrender.com/callback';
 const GUILD_ID = '1393658313006383176';
 
@@ -18,11 +17,9 @@ app.get('/', (req, res) => {
 
 app.get('/callback', async (req, res) => {
     const { code } = req.query;
-
-    if (!code) return res.send('Erro: Código não fornecido pelo Discord.');
+    if (!code) return res.send('Erro: Código não fornecido.');
 
     try {
-        // 1. Troca o código por um token de acesso
         const tokenResponse = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
@@ -34,7 +31,6 @@ app.get('/callback', async (req, res) => {
 
         const accessToken = tokenResponse.data.access_token;
 
-        // 2. Verifica os servidores do utilizador
         const guildsResponse = await axios.get('https://discord.com/api/users/@me/guilds', {
             headers: { Authorization: `Bearer ${accessToken}` }
         });
@@ -42,12 +38,14 @@ app.get('/callback', async (req, res) => {
         const isMember = guildsResponse.data.find(g => g.id === GUILD_ID);
 
         if (isMember) {
-            // Se ele for Admin no servidor, as permissões têm o bit 8 ativo (0x8)
-            const isStaff = (isMember.permissions & 0x8) === 0x8 || isMember.owner;
+            // AJUSTE PARA RECONHECER O DONO (TU!)
+            const permissions = BigInt(isMember.permissions);
+            const isAdmin = (permissions & 0x8n) === 0x8n;
+            const isStaff = isAdmin || isMember.owner;
             
             if (isStaff) {
                 res.send(`<body style="background:#1c0707;color:white;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;">
-                    <div style="text-align:center;border:2px solid #b00000;padding:40px;border-radius:15px;">
+                    <div style="text-align:center;border:2px solid #b00000;padding:40px;border-radius:15px;background:rgba(0,0,0,0.3);">
                         <h1>👑 Painel Staff - Jordan Shop</h1>
                         <p>Bem-vindo, Administrador! Acesso total concedido.</p>
                     </div>
@@ -61,9 +59,9 @@ app.get('/callback', async (req, res) => {
                 </body>`);
             }
         } else {
-            res.send('<h1>❌ Erro: Precisas de estar no Servidor da Jordan Shop para entrar!</h1>');
+            // Se der este erro e tu ESTÁS no server, é porque o cache do Discord ainda não atualizou
+            res.send('<h1>❌ Erro: Não te encontrei no Servidor da Jordan Shop! Tenta sair e entrar no servidor.</h1>');
         }
-
     } catch (error) {
         console.error(error);
         res.send('<h1>❌ Erro ao validar login no Discord.</h1>');
