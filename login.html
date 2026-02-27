@@ -70,12 +70,12 @@
                 <span class="toggle-btn" id="eye-icon" onclick="togglePass()">🙈</span>
             </div>
             
-            <button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
+<button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
             
             <div class="divider">OU</div>
             
-            <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
-                <img src="https://assets-global.website-files.com/6257adef93467e05d00d23f0/636e0a224930327376991901_Discord-Logo-White.svg" class="discord-logo">
+            <a href="javascript:void(0);" onclick="loginDiscordAnimado()" class="btn-discord">
+                <img src="Discord-logo-icon.jpg" class="discord-logo" style="border-radius: 5px;">
                 Login Discord
             </a>
         </div>
@@ -90,16 +90,28 @@
             "pincher11": "pincher_11"
         };
 
+        // Função de login manual com espera de 2s
         function validarLogin() {
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
             
             if (contas[u] && contas[u] === p) {
-                // ISTO VAI MANDAR PARA A LOJA
-                window.location.href = `loja.html?user=${encodeURIComponent(u)}`;
+                alert('Bem-vindo, ' + u + '! Login realizado com sucesso.');
+                setTimeout(function() {
+                    window.location.href = `loja.html?user=${encodeURIComponent(u)}`;
+                }, 2000);
             } else {
                 alert('Acesso negado!');
             }
+        }
+
+        // Função para o Discord também ter animação/espera
+        function loginDiscordAnimado() {
+            alert('A redirecionar para o Discord... Aguarda 2 segundos.');
+            setTimeout(function() {
+                // Aqui metes o teu link oficial do Discord
+                window.location.href = "https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds";
+            }, 2000);
         }
 
         function togglePass() {
