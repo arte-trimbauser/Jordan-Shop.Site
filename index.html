@@ -12,57 +12,83 @@
         
         .site-container {
             width: 100%; height: 100%;
-            /* 3. Onde deixo o fundo mais claro (RGBA) */
-            /* Mudei o último número (a transparência) de 0.7 para 0.4 para clarear. */
-            background: linear-gradient(rgba(44, 11, 11, 0.4), rgba(44, 11, 11, 0.4)), url('login.jpg');
+            /* Fundo mais claro para se ver bem a imagem (0.3 de escurecimento) */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('login.jpg');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* 2. Parte Olá Bem Vindo... removida do HTML abaixo */
-
         .login-box {
-            background: rgba(28, 7, 7, 0.95);
-            padding: 35px; border-radius: 15px;
-            width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
+            background: rgba(20, 5, 5, 0.9); /* Caixa escura mas elegante */
+            padding: 40px; border-radius: 20px;
+            width: 320px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
         }
 
+        /* Perfil sem a borda azul/amarela antiga */
         .profile-icon {
-            width: 80px; height: 80px;
+            width: 90px; height: 90px;
             border-radius: 50%;
-            border: 3px solid #b00000;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             object-fit: cover;
+            border: 2px solid #b00000; /* Borda fina bordeaux */
         }
 
-        .input-group { background: #4a0000; margin: 12px 0; padding: 10px; border-radius: 8px; display: flex; align-items: center; }
-        input { background: transparent; border: none; color: white; width: 100%; padding: 5px; outline: none; }
-        .btn-entrar { width: 100%; padding: 15px; background: #b00000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .btn-discord { background: #5865F2; color: white; text-decoration: none; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 20px; font-weight: bold; }
-        .discord-logo { width: 20px; margin-right: 10px; }
+        .input-group { 
+            background: #3a0000; margin: 15px 0; padding: 12px; 
+            border-radius: 10px; display: flex; align-items: center; 
+            position: relative;
+        }
+
+        input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
+        
+        /* O Olho da Password */
+        .toggle-btn { cursor: pointer; font-size: 18px; margin-left: 10px; user-select: none; }
+
+        .btn-entrar { 
+            width: 100%; padding: 15px; background: #b00000; color: white; 
+            border: none; border-radius: 10px; cursor: pointer; 
+            font-weight: bold; margin-top: 10px; transition: 0.3s;
+        }
+        .btn-entrar:hover { background: #ff0000; transform: scale(1.02); }
+
+        /* Botão Discord com Logo Oficial */
+        .btn-discord {
+            background: #5865F2; color: white; text-decoration: none;
+            padding: 15px; border-radius: 10px; display: flex;
+            align-items: center; justify-content: center;
+            margin-top: 20px; font-weight: bold; transition: 0.3s;
+        }
+        .btn-discord:hover { background: #4752c4; }
+        .discord-logo { width: 22px; margin-right: 12px; }
+
+        .divider { color: #666; font-size: 12px; margin: 15px 0; }
     </style>
 </head>
 <body>
 
     <div class="site-container">
         <div class="login-box">
-            <img src="login.jpg" class="profile-icon" alt="Profile Logo">
+            <img src="login.jpg" class="profile-icon">
             
             <div class="input-group">
-                <input type="text" id="user" placeholder="Nome do Utilizador"> 👤
+                <input type="text" id="user" placeholder="Nome do Utilizador">
+                <span>👤</span>
             </div>
+            
             <div class="input-group">
-                <input type="password" id="pass" placeholder="Password"> 👁️
+                <input type="password" id="pass" placeholder="Password">
+                <span class="toggle-btn" id="eye-icon" onclick="togglePass()">👁️‍🗨️</span>
             </div>
             
             <button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
             
-            <div style="color: #aaa; text-align: center; margin: 15px 0; font-size: 12px;">OU</div>
+            <div class="divider">OU</div>
             
             <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="discord-logo"> Login Discord
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="discord-logo">
+                Login Discord
             </a>
         </div>
     </div>
@@ -80,10 +106,22 @@
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
             if (contas[u] && contas[u] === p) {
-                alert('Bem-vindo, ' + u + '! Login realizado com sucesso.');
-                // Podes adicionar redirecionamento aqui: window.location.href = 'loja.html';
+                alert('Bem-vindo, ' + u + '!');
             } else {
-                alert('Utilizador ou Password incorretos!');
+                alert('Acesso negado!');
+            }
+        }
+
+        // Função para mostrar/esconder password e mudar o ícone
+        function togglePass() {
+            const input = document.getElementById('pass');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.textContent = "👁️"; // Olho aberto
+            } else {
+                input.type = "password";
+                icon.textContent = "👁️‍🗨️"; // Olho fechado/riscado
             }
         }
     </script>
