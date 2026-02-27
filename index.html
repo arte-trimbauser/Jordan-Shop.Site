@@ -5,79 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordan Shop - Login</title>
     <style>
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            font-family: 'Segoe UI', Arial, sans-serif; background: #000;
-        }
-
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; background: #000; }
         .site-container {
             width: 100%; height: 100%;
-            /* ALTERADO: Agora aponta para login.jpg */
             background: linear-gradient(rgba(44, 11, 11, 0.7), rgba(44, 11, 11, 0.7)), url('login.jpg');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-
-        .welcome-msg {
-            background: rgba(44, 11, 11, 0.9);
-            color: white; padding: 12px 25px;
-            border-radius: 8px; margin-bottom: 25px;
-            font-size: 18px; border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-
-        .login-box {
-            background: rgba(28, 7, 7, 0.95);
-            padding: 35px; border-radius: 15px;
-            width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .input-group {
-            background: #4a0000; color: #ccc;
-            margin: 12px 0; padding: 15px;
-            border-radius: 8px; display: flex;
-            justify-content: space-between; align-items: center;
-            font-size: 14px;
-        }
-
-        .btn-discord {
-            background: #5865F2; color: white;
-            text-decoration: none; padding: 15px;
-            border-radius: 8px; display: flex;
-            align-items: center; justify-content: center;
-            margin-top: 25px; font-weight: bold;
-            transition: 0.3s; border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .btn-discord:hover { background: #4752c4; transform: scale(1.02); }
-
-        .discord-logo { width: 24px; margin-right: 12px; }
+        .welcome-msg { background: rgba(44, 11, 11, 0.9); color: white; padding: 12px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center; }
+        .login-box { background: rgba(28, 7, 7, 0.95); padding: 35px; border-radius: 15px; width: 320px; border: 1px solid rgba(255,255,255,0.05); }
+        .input-group { background: #4a0000; margin: 12px 0; padding: 10px; border-radius: 8px; display: flex; align-items: center; }
+        input { background: transparent; border: none; color: white; width: 100%; padding: 5px; outline: none; }
+        .btn-entrar { width: 100%; padding: 15px; background: #b00000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .btn-discord { background: #5865F2; color: white; text-decoration: none; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 20px; }
+        .discord-logo { width: 20px; margin-right: 10px; }
     </style>
 </head>
 <body>
-
     <div class="site-container">
-        <div class="welcome-msg">
-            Olá Bem Vindo ao Login do Jordan Shop Site
-        </div>
-        
+        <div class="welcome-msg">Olá Bem Vindo ao Login do Jordan Shop Site</div>
         <div class="login-box">
-            <div class="input-group">
-                <span>Nome do Utilizador</span>
-                <span>👤</span>
-            </div>
-            <div class="input-group">
-                <span>Password</span>
-                <span>👁️</span>
-            </div>
-            
-            <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="discord-logo">
-                Login Discord
+            <div class="input-group"><input type="text" id="user" placeholder="Nome do Utilizador"> 👤</div>
+            <div class="input-group"><input type="password" id="pass" placeholder="Password"> 👁️</div>
+            <button class="btn-entrar" onclick="validarLogin()">ENTRAR</button>
+            <div style="color: #aaa; text-align: center; margin: 15px 0; font-size: 12px;">OU</div>
+            <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="discord-logo"> Login Discord
             </a>
         </div>
     </div>
-
+    <script>
+        const contas = {
+            "Jordan Costa": "Jordan26Costa",
+            "lucasvieira": "lucasvieira0453",
+            "migueldodrip": "migueldodrip_09110",
+            "pincher11": "pincher_11"
+        };
+        function validarLogin() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            if (contas[u] && contas[u] === p) {
+                alert('Bem-vindo, ' + u + '! Login realizado com sucesso.');
+            } else {
+                alert('Utilizador ou Password incorretos!');
+            }
+        }
+    </script>
 </body>
 </html>
