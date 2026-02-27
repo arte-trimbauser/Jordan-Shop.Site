@@ -12,7 +12,8 @@ const GUILD_ID = '1393658313006383176';
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    // Se mudaste o nome do ficheiro, aqui tem de dizer login.html
+    res.sendFile(path.join(__dirname, 'login.html')); 
 });
 
 app.get('/callback', async (req, res) => {
