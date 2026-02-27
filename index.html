@@ -4,31 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordan Shop - Login</title>
+    
+    <link rel="icon" type="image/jpeg" href="login.jpg">
+
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; background: #000; }
+        
         .site-container {
             width: 100%; height: 100%;
-            background: linear-gradient(rgba(44, 11, 11, 0.7), rgba(44, 11, 11, 0.7)), url('login.jpg');
+            /* 3. Onde deixo o fundo mais claro (RGBA) */
+            /* Mudei o último número (a transparência) de 0.7 para 0.4 para clarear. */
+            background: linear-gradient(rgba(44, 11, 11, 0.4), rgba(44, 11, 11, 0.4)), url('login.jpg');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .welcome-msg { background: rgba(44, 11, 11, 0.9); color: white; padding: 12px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center; font-weight: bold; }
-        .login-box { background: rgba(28, 7, 7, 0.95); padding: 35px; border-radius: 15px; width: 320px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+
+        /* 2. Parte Olá Bem Vindo... removida do HTML abaixo */
+
+        .login-box {
+            background: rgba(28, 7, 7, 0.95);
+            padding: 35px; border-radius: 15px;
+            width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .profile-icon {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 3px solid #b00000;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
         .input-group { background: #4a0000; margin: 12px 0; padding: 10px; border-radius: 8px; display: flex; align-items: center; }
         input { background: transparent; border: none; color: white; width: 100%; padding: 5px; outline: none; }
-        .btn-entrar { width: 100%; padding: 15px; background: #b00000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-entrar:hover { background: #ff0000; }
+        .btn-entrar { width: 100%; padding: 15px; background: #b00000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .btn-discord { background: #5865F2; color: white; text-decoration: none; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 20px; font-weight: bold; }
         .discord-logo { width: 20px; margin-right: 10px; }
-        .profile-icon { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #b00000; margin-bottom: 15px; object-fit: cover; }
     </style>
 </head>
 <body>
+
     <div class="site-container">
-        <div class="welcome-msg">Olá Bem Vindo ao Login do Jordan Shop Site</div>
-        
         <div class="login-box">
-            <img src="login.jpg" class="profile-icon" alt="Logo">
+            <img src="login.jpg" class="profile-icon" alt="Profile Logo">
             
             <div class="input-group">
                 <input type="text" id="user" placeholder="Nome do Utilizador"> 👤
@@ -61,6 +81,7 @@
             const p = document.getElementById('pass').value;
             if (contas[u] && contas[u] === p) {
                 alert('Bem-vindo, ' + u + '! Login realizado com sucesso.');
+                // Podes adicionar redirecionamento aqui: window.location.href = 'loja.html';
             } else {
                 alert('Utilizador ou Password incorretos!');
             }
