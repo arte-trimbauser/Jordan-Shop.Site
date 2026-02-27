@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan Shop - Login</title>
+    <style>
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #000; display: flex; justify-content: center; align-items: center; 
+        }
+
+        .site-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/xTzY4Tmw/2.png');
+            background-size: contain; /* Ajusta a imagem ao ecrã */
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ESTE É O BOTÃO QUE VAIS CLICAR */
+        .btn-discord-login {
+            padding: 15px 30px;
+            background: #5865F2; /* Cor oficial do Discord */
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0px 0px 20px rgba(88, 101, 242, 0.5);
+            z-index: 999; /* Garante que fica por cima de tudo */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=identify+guilds" class="btn-discord-login">
+            ENTRAR COM DISCORD
+        </a>
+    </div>
+
+</body>
+</html>
