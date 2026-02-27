@@ -1,50 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jordan Shop - Login</title>
-    <style>
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #000; display: flex; justify-content: center; align-items: center; 
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan Shop - Login</title>
+    <style>
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            font-family: 'Segoe UI', Arial, sans-serif; background: #000;
+        }
 
-        .site-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.postimg.cc/xTzY4Tmw/2.png');
-            background-size: contain; /* Ajusta a imagem ao ecrã */
-            background-repeat: no-repeat;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .site-container {
+            width: 100%; height: 100%;
+            /* ALTERADO: Agora aponta para login.jpg */
+            background: linear-gradient(rgba(44, 11, 11, 0.7), rgba(44, 11, 11, 0.7)), url('login.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
 
-        /* ESTE É O BOTÃO QUE VAIS CLICAR */
-        .btn-discord-login {
-            padding: 15px 30px;
-            background: #5865F2; /* Cor oficial do Discord */
-            color: white;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 2px solid white;
-            box-shadow: 0px 0px 20px rgba(88, 101, 242, 0.5);
-            z-index: 999; /* Garante que fica por cima de tudo */
-        }
-    </style>
+        .welcome-msg {
+            background: rgba(44, 11, 11, 0.9);
+            color: white; padding: 12px 25px;
+            border-radius: 8px; margin-bottom: 25px;
+            font-size: 18px; border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .login-box {
+            background: rgba(28, 7, 7, 0.95);
+            padding: 35px; border-radius: 15px;
+            width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .input-group {
+            background: #4a0000; color: #ccc;
+            margin: 12px 0; padding: 15px;
+            border-radius: 8px; display: flex;
+            justify-content: space-between; align-items: center;
+            font-size: 14px;
+        }
+
+        .btn-discord {
+            background: #5865F2; color: white;
+            text-decoration: none; padding: 15px;
+            border-radius: 8px; display: flex;
+            align-items: center; justify-content: center;
+            margin-top: 25px; font-weight: bold;
+            transition: 0.3s; border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-discord:hover { background: #4752c4; transform: scale(1.02); }
+
+        .discord-logo { width: 24px; margin-right: 12px; }
+    </style>
 </head>
 <body>
 
-    <div class="site-container">
-        <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&response_type=code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord-login">
-            ENTRAR COM DISCORD
-        </a>
-    </div>
+    <div class="site-container">
+        <div class="welcome-msg">
+            Olá Bem Vindo ao Login do Jordan Shop Site
+        </div>
+        
+        <div class="login-box">
+            <div class="input-group">
+                <span>Nome do Utilizador</span>
+                <span>👤</span>
+            </div>
+            <div class="input-group">
+                <span>Password</span>
+                <span>👁️</span>
+            </div>
+            
+            <a href="https://discord.com/oauth2/authorize?client_id=1424479855466123284&code&redirect_uri=https%3A%2F%2Fjordan-shop-site.onrender.com%2Fcallback&scope=identify+guilds" class="btn-discord">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="discord-logo">
+                Login Discord
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
