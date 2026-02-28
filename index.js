@@ -12,7 +12,6 @@ const GUILD_ID = '1393629457599828040';
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', (req, res) => {
-    // Se mudaste o nome do ficheiro, aqui tem de dizer login.html
     res.sendFile(path.join(__dirname, 'login.html')); 
 });
 
@@ -32,6 +31,12 @@ app.get('/callback', async (req, res) => {
 
         const accessToken = tokenResponse.data.access_token;
 
+        // --- NOVO: PEGAR OS DADOS DO UTILIZADOR (NOME) ---
+        const userResponse = await axios.get('https://discord.com/api/users/@me', {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+        const discordUser = userResponse.data; // Aqui está o nome!
+
         const guildsResponse = await axios.get('https://discord.com/api/users/@me/guilds', {
             headers: { Authorization: `Bearer ${accessToken}` }
         });
@@ -39,29 +44,10 @@ app.get('/callback', async (req, res) => {
         const isMember = guildsResponse.data.find(g => g.id === GUILD_ID);
 
         if (isMember) {
-            // AJUSTE PARA RECONHECER O DONO (TU!)
-            const permissions = BigInt(isMember.permissions);
-            const isAdmin = (permissions & 0x8n) === 0x8n;
-            const isStaff = isAdmin || isMember.owner;
-            
-            if (isStaff) {
-                res.send(`<body style="background:#1c0707;color:white;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;">
-                    <div style="text-align:center;border:2px solid #b00000;padding:40px;border-radius:15px;background:rgba(0,0,0,0.3);">
-                        <h1>👑 Painel Staff - Jordan Shop</h1>
-                        <p>Bem-vindo, Administrador! Acesso total concedido.</p>
-                    </div>
-                </body>`);
-            } else {
-                res.send(`<body style="background:#1c0707;color:white;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;">
-                    <div style="text-align:center;padding:40px;">
-                        <h1>✅ Login Efetuado!</h1>
-                        <p>Olá cliente! Bem-vindo à Jordan Shop.</p>
-                    </div>
-                </body>`);
-            }
+            // Manda para a loja com o nome do Discord para a animação de 2 segundos
+            res.redirect(`/loja.html?user=${encodeURIComponent(discordUser.username)}`);
         } else {
-            // Se der este erro e tu ESTÁS no server, é porque o cache do Discord ainda não atualizou
-            res.send('<h1>❌ Erro: Não te encontrei no Servidor da Jordan Shop! Tenta sair e entrar no servidor.</h1>');
+            res.send('<h1>❌ Erro: Não estás no servidor da Jordan Shop!</h1>');
         }
     } catch (error) {
         console.error(error);
