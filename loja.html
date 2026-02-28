@@ -5,61 +5,82 @@
     <title>Jordan Shop - Menu</title>
     <link rel="icon" type="image/png" href="logo.png">
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; color: white; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; color: white; background: #000; overflow: hidden; }
+        
         .bg { 
             position: fixed; width: 100%; height: 100%; 
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('login.jpg');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('login.jpg');
             background-size: cover; background-position: center; z-index: -1;
         }
-        /* Topo */
-        .header { display: flex; justify-content: space-between; padding: 10px 20px; background: rgba(30, 0, 0, 0.85); border-bottom: 2px solid #b00000; }
-        .btn-status { background: #4a0000; border: none; color: white; padding: 8px 15px; border-radius: 5px; }
 
-        .container { display: flex; height: 90vh; }
+        /* Ecrã de Boas-Vindas (os 2 segundos) */
+        #welcome-screen {
+            position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            display: flex; justify-content: center; align-items: center; z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Menu Principal (fica escondido no início) */
+        #main-content { display: none; opacity: 0; transition: opacity 0.8s ease; }
+
+        /* Estilo da Sidebar e Cabeçalho */
+        .header { display: flex; justify-content: space-between; padding: 10px 20px; background: rgba(30, 0, 0, 0.9); border-bottom: 2px solid #b00000; }
+        .sidebar { width: 240px; background: rgba(20, 5, 5, 0.95); height: calc(100vh - 55px); padding: 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+        .menu-item { background: #7a0000; padding: 12px; margin: 10px 0; border-radius: 5px; cursor: pointer; text-align: center; font-weight: bold; }
         
-        /* Menu Lateral */
-        .sidebar { width: 220px; background: rgba(20, 5, 5, 0.95); padding: 20px; }
-        .menu-btn { background: #8b0000; padding: 12px; margin: 8px 0; border-radius: 5px; cursor: pointer; text-align: center; font-weight: bold; }
-        .menu-btn:hover { background: #ff0000; }
-
-        /* Centro */
-        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .welcome-box { font-size: 45px; text-align: center; text-shadow: 3px 3px 5px #000; }
-        .user-name { color: #aaa; }
+        .welcome-text { font-size: 45px; text-align: center; text-shadow: 0 0 20px #ff0000; }
+        .user-name { color: #aaaaaa; }
     </style>
 </head>
 <body>
     <div class="bg"></div>
-    <div class="header">
-        <div style="background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 4px;">Jordan Shop Site | Atualizar</div>
-        <button class="btn-status" id="top-user">Olá User</button>
+
+    <div id="welcome-screen">
+        <h1 class="welcome-text">Bem-Vindo User <span class="user-name" id="display-name">@carregando...</span></h1>
     </div>
 
-    <div class="container">
-        <div class="sidebar">
-            <div style="background:#500; padding:10px; margin-bottom:15px; border-radius:5px; text-align:center;">Pesquisar</div>
-            <div class="menu-btn" style="border: 2px solid white;">• Menu</div>
-            <div class="menu-btn">Transcripts</div>
-            <div class="menu-btn">Vendas</div>
-            <div class="menu-btn">Reivindicações</div>
-            <div class="menu-btn">Aberturas de ticket</div>
-            <div class="menu-btn">Bot Online</div>
+    <div id="main-content">
+        <div class="header">
+            <div style="background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 5px;">Jordan Shop Site | v1.0</div>
+            <div id="top-user" style="background:#b00000; padding:5px 15px; border-radius:5px; font-weight:bold;">Olá</div>
         </div>
-
-        <div class="main-content">
-            <div class="welcome-box">
-                Bem-Vindo User <span class="user-name" id="display-name">@user</span><br>
-                aqui é o menu
+        
+        <div style="display: flex;">
+            <div class="sidebar">
+                <div style="background:#4a0000; padding:10px; margin-bottom:20px; border-radius:5px; text-align:center;">Pesquisar</div>
+                <div class="menu-item" style="border: 2px solid white;">• Menu</div>
+                <div class="menu-item">Transcripts</div>
+                <div class="menu-item">Vendas</div>
+                <div class="menu-item">Tickets</div>
+                <div class="menu-item">Bot Online</div>
+            </div>
+            <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+                <h2 style="font-size: 30px;">Painel de Administração da Jordan Shop</h2>
             </div>
         </div>
     </div>
 
     <script>
-        // Pega o nome do utilizador da URL
+        // Pega o nome da URL (adaptado ao nome do Discord ou manual)
         const params = new URLSearchParams(window.location.search);
         const user = params.get('user') || 'Convidado';
+        
+        // Atualiza os textos
         document.getElementById('display-name').textContent = '@' + user;
         document.getElementById('top-user').textContent = 'Olá ' + user;
+
+        // Espera 2 segundos e faz a transição
+        setTimeout(function() {
+            const screen = document.getElementById('welcome-screen');
+            const content = document.getElementById('main-content');
+            
+            screen.style.opacity = '0';
+            setTimeout(() => {
+                screen.style.display = 'none';
+                content.style.display = 'block';
+                setTimeout(() => { content.style.opacity = '1'; }, 50);
+            }, 500);
+        }, 2000);
     </script>
 </body>
 </html>
